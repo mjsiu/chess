@@ -9,8 +9,12 @@ class Bishop < SlidingPiece
     @move_set = []
   end
 
-  def moves(pos,slider_type)
-    super(pos,slider_type)
+  def moves(pos, move_direction)
+    super(pos, move_direction)
+  end
+
+  def move_direction
+    diag
   end
 
 end

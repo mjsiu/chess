@@ -25,15 +25,14 @@ class SlidingPiece < Piece
     @pos = pos
   end
 
-  def moves(pos,slider_type)
-    if slider_type == "Rook"
-      move_set = MOVESHOR
-    elsif slider_type == "Bishop"
-      move_set = MOVESDI
-    else slider_type == "Queen"
-      move_set = MOVESHOR.concat(MOVESDI)
-    end
+  def moves(pos,direction)
+    move_set = diag
     super(pos, move_set)
   end
+
+  def diag
+    move_set = MOVESDI
+  end
+
 
 end
