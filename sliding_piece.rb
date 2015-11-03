@@ -1,6 +1,7 @@
 require_relative 'piece.rb'
 
 class SlidingPiece < Piece
+  attr_accessor :board, :color, :pos
 
   MOVESDI = [
     [-1,1], [-1,-1], [1,1], [1,-1],
@@ -19,23 +20,20 @@ class SlidingPiece < Piece
   ]
 
   def initialize(board, color, pos)
+    @board = board
+    @color = color
+    @pos = pos
   end
 
-  def moves(pos, move_set)
-    # if slider_type == "Rook"
-    #   move_set = move_set_hor(pos)
-    # elsif slider_type == "Bishop"
-    #   move_set = move_set_diag(pos)
-    # else slider_type == "Queen"
-    #   move_set = move_set_hor(pos).concat(move_set_diag(pos))
-    # end
+  def moves(pos,slider_type)
+    if slider_type == "Rook"
+      move_set = MOVESHOR
+    elsif slider_type == "Bishop"
+      move_set = MOVESDI
+    else slider_type == "Queen"
+      move_set = MOVESHOR.concat(MOVESDI)
+    end
     super(pos, move_set)
   end
-
-  def move_set_hor(pos)
-    
-  end
-
-  def move_type
 
 end

@@ -9,20 +9,8 @@ class Bishop < SlidingPiece
     @move_set = []
   end
 
-  def moves(pos,move_set)
-    super(pos, slider_type)
-  end
-
-  def bishop_move_set
-    @move_set = move_set_diag(pos)
-  end
-
-  def rook_move_set
-    @move_set = move_set_hor(pos)
-  end
-
-  def queen_move_set
-    @move_set = move_set_hor(pos).concat(move_set_diag(pos))
+  def moves(pos,slider_type)
+    super(pos,slider_type)
   end
 
 end

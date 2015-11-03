@@ -9,12 +9,8 @@ class Rooke < SlidingPiece
     @move_set = []
   end
 
-  def moves(pos,move_set)
+  def moves(pos,slider_type)
     super(pos, slider_type)
-  end
-
-  def rook_move_set
-    @move_set = move_set_hor(pos)
   end
 
 end
