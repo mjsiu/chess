@@ -1,4 +1,5 @@
 require_relative 'piece.rb'
+# require_relative 'bishop.rb'
 
 class SlidingPiece < Piece
   attr_accessor :board, :color, :pos
@@ -25,14 +26,27 @@ class SlidingPiece < Piece
     @pos = pos
   end
 
-  def moves(pos,direction)
-    move_set = diag
+  def moves(pos, direction)
+    move_set = direction
     super(pos, move_set)
   end
+
+# each loop w all directions
+  # while true
+  # pos += dig or horz
+  # if pos.out_of_bounds? break
+  # if another piece is there and it's not my color (add piece & break)
 
   def diag
     move_set = MOVESDI
   end
 
+  def hor
+    move_set = MOVESHOR
+  end
+
+  def hor_diag
+    move_set = MOVESDI.concat(MOVESHOR)
+  end
 
 end

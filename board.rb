@@ -1,35 +1,56 @@
-require_relative "./piece.rb"
-require_relative "./display.rb"
+require_relative "pieces.rb"
+require_relative "display.rb"
 
 class Board
-  attr_accessor :grid
+  attr_accessor :grid, :black, :white
+
+  CONSTANT = [
+    Rooke,
+    Knight,
+    Bishop,
+    Queen,
+    King,
+    Bishop,
+    Knight,
+    Rooke
+  ]
+
 
   def initialize
     @grid = Array.new(8) { Array.new(8) }
     add_pieces(@grid)
+    @black
+    @white
   end
 
   def [](pos)
-    x, y = pos[0], pos[1]
+    x, y = pos
     grid[x][y]
   end
 
   def []=(pos, value)
-    x, y = pos[0], pos[1]
+    x, y = pos
     grid[x][y].value = value
   end
 
   def add_pieces(grid)
     grid.each_index do |x|
       grid.each_index do |y|
-        if x == 0 || x == 1
-          grid[x][y] = 1#Piece.new(self, "black", )
-        elsif x == 6 || x == 7
-          grid[x][y] = 2#Piece.new(self, "white")
+        if x == 0
+          loop_constants([x,y])
+        elsif x == 7
+          loop_constants([x,y])
         end
       end
     end
   end
+
+  def loop_constants(grid_cord)
+    x = CONSTANT[grid_cord[1]]
+      grid[grid_cord[0]][grid_cord[1]] = x.new(self, :black, grid_cord)
+  end
+
+
 
   def move(start, end_pos)
     raise "No piece" if self[start].nil?
@@ -40,12 +61,16 @@ class Board
     else
       raise "Invalid move"
     end
-
   end
 
   def in_bound?(pos)
-    return false unless pos[0].between?(0,7) && pos[1].between?(0,7)
-    true
+    pos[0].between?(0,7) && pos[1].between?(0,7)
   end
 
+end
+
+if $PROGRAM_NAME == __FILE__
+  b = Board.new
+  d = Display.new(b)
+  d.render
 end
